@@ -24,6 +24,7 @@
             <mvc:exclude-mapping path="/login"/>
             <mvc:exclude-mapping path="/registered"/>
             <mvc:exclude-mapping path="/addUser"/>
+            <mvc:exclude-mapping path="/repeats"/>
             <bean class="com.lanou.blog.intercepter.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

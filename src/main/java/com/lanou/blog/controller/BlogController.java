@@ -15,7 +15,6 @@ public class BlogController {
     @Resource
     private BlogService service;
 
-
     @RequestMapping(value = "/allBlog")
     public String allBlogPage() {
         return "page/blog/allBlog";

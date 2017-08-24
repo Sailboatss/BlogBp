@@ -18,6 +18,10 @@
         SELECT * FROM b_user WHERE name = #{name} and password = #{password}
     </select>
 
+    <select id="findByName" resultMap="userMap" parameterType="String">
+        SELECT * FROM b_user WHERE name = #{name}
+    </select>
+
 
     <insert id="insertUser" parameterType="User">
         INSERT INTO b_user VALUES (NULL,#{name},#{password},null,null,#{tel},#{address})

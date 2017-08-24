@@ -26,11 +26,15 @@
 <br>
 <br>
 <center>
-    <p style="color:red;font-size:16px;">${message}</p>
+
     <form class="form-inline" action="/addUser" method="post">
+        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red;font-size:16px;">${message}</span>
+        <br>
+        <span id="aaa" style="color:red;font-size:16px;"></span>
+        <br>
         <div class="form-group">
             <label for="exampleInputName2">用户名&nbsp;&nbsp;&nbsp;</label>
-            <input name="name"  type="text" class="form-control" id="exampleInputName2" placeholder="请输入用户名">
+            <input onblur="repeat()" name="name"  type="text" class="form-control" id="exampleInputName2" placeholder="请输入用户名">
         </div>
         <br>
         <div class="form-group">
@@ -72,6 +76,24 @@
             }
         });
     });
+    
+    function repeat() {
+        var val = $('#exampleInputName2').val();
+        $.ajax({
+            url:"/repeats",
+            type:"post",
+            data:{
+                content:val
+            },
+            success:function (result){
+
+                $('#aaa').html(result.content)
+            }
+        })
+    }
+    
+    
+    
 </script>
 
 

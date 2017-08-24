@@ -8,9 +8,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -75,25 +79,17 @@ public class UserController {
             return "registered";
         }
 
-
-
         String password1 = request.getParameter("password1");
-
 
         if (!password1.equals(user.getPassword())){
             map.addAttribute("message","两次密码输入不一致");
             return "registered";
         }
 
-
         if (!matcher.find()){
             map.addAttribute("message","请输入正确的手机号");
             return "registered";
         }
-
-
-
-
 
         String md5Value = MD5.getMD5Value(user.getPassword());
         user.setPassword(md5Value);
@@ -101,6 +97,21 @@ public class UserController {
 
         return "login";
     }
+
+
+    @RequestMapping(value = "/repeats",method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,String> repeat(@RequestParam("content") String content){
+        User byName = userService.findByName(content);
+        Map<String,String> map = new HashMap<String, String>();
+        if (byName!=null){
+            map.put("content","用户名已被占用");
+            return map;
+        }
+        map.put("content","用户名可以使用");
+        return map;
+    }
+
 
 
 

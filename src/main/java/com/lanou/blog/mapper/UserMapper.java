@@ -17,4 +17,6 @@ public interface UserMapper {
     //注册
     void insertUser(User user);
 
+    User findByName(@Param("name") String name);
+
 }
